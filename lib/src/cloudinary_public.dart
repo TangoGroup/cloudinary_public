@@ -55,6 +55,7 @@ class CloudinaryPublic {
   /// Override the default upload preset (when [CloudinaryPublic] is instantiated) with this one (if specified).
   Future<CloudinaryResponse> uploadFile(
     CloudinaryFile file, {
+    ProgressCallback onSendProgress,
     String uploadPreset,
   }) async {
     if (cache) {
@@ -80,6 +81,7 @@ class CloudinaryPublic {
       '${describeEnum(file.resourceType).toLowerCase()}'
       '/upload',
       data: formData,
+      onSendProgress: onSendProgress,
     );
 
     final cloudinaryResponse = CloudinaryResponse.fromMap(res.data);
